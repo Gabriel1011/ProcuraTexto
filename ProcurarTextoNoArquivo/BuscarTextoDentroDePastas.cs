@@ -139,6 +139,7 @@ namespace ProcurarTextoNoArquivo
                     case "STOP_CODE": return "STOP_CODE -> BLOQUEIO";
                     case "SEAL_TYPE": return "SEAL_TYPE -> TIPO_LACRE";
                     case "VIEW_VES_SCHEDULE": return "VIEW_VES_SCHEDULE -> ESCALA";
+                    case "VES_SERVICE": return "VES_SERVICE -> SERVICOS_NAVIO";
                     default: return "";
                 }
                 
@@ -167,7 +168,8 @@ namespace ProcurarTextoNoArquivo
                     "CHE_MASTER",
                     "STOP_CODE",
                     "SEAL_TYPE",
-                    "VIEW_VES_SCHEDULE"
+                    "VIEW_VES_SCHEDULE",
+                    "VES_SERVICE"
                 };
 
                 foreach (var tabelaTops in tabelasTops)
