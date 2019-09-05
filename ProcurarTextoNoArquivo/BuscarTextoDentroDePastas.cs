@@ -114,6 +114,8 @@ namespace ProcurarTextoNoArquivo
 
             string VerificarDePara(string linha)
             {
+                if(linha.Contains("DAMAGE_CODE"))
+                { }
                 switch (VerificarContains(linha))
                 {
                     case "ITEM": return "ITEM -> MERCADORIA";
@@ -131,6 +133,11 @@ namespace ProcurarTextoNoArquivo
                     case "ITEMLOCATION": return "ITEM_LOCATION -> AMR_LOCALIZACAO_MERCADORIA";
                     case "BOOKINGS": return "BOOKINGS -> BOOKING + ITEM_BOOKING";
                     case "PORTCODE": return "PORTCODE -> PORTO";
+                    case "DAMAGE_CODE": return "DAMAGE_CODE -> TIPO_AVARIA";
+                    case "CHE_MASTER": return "CHE_MASTER -> EQUIPAMENTOS";
+                    case "STOP_CODE": return "STOP_CODE -> BLOQUEIO";
+                    case "SEAL_TYPE": return "SEAL_TYPE -> TIPO_LACRE";
+                    case "VIEW_VES_SCHEDULE": return "VIEW_VES_SCHEDULE -> ESCALA";
                     default: return "";
                 }
                 
@@ -154,7 +161,12 @@ namespace ProcurarTextoNoArquivo
                     "VESSEL_DETAILS",
                     "ITEM_REEFER",
                     "VESSEL",
-                    "PORTCODE"
+                    "PORTCODE",
+                    "DAMAGE_CODE",
+                    "CHE_MASTER",
+                    "STOP_CODE",
+                    "SEAL_TYPE",
+                    "VIEW_VES_SCHEDULE"
                 };
 
                 foreach (var tabelaTops in tabelasTops)
