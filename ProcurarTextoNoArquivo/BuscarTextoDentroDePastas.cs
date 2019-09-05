@@ -39,6 +39,7 @@ namespace ProcurarTextoNoArquivo
             && !p.Contains(".vs")
             && !p.Contains("x86")
             && !p.Contains("packages")
+            && !p.Contains("Office11")
             && !p.Contains("v16")).ToArray();
 
             foreach (var pasta in pastas)
