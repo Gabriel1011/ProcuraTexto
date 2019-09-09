@@ -119,28 +119,33 @@ namespace ProcurarTextoNoArquivo
                 { }
                 switch (VerificarContains(linha))
                 {
-                    case "ITEM": return "ITEM -> MERCADORIA";
-                    case "VESSEL_DETAILS": return "VESSEL_DETAILS -> ESCALA";
-                    case "VESSELDETAILS": return "VESSEL_DETAILS -> ESCALA";
-                    case "VESVOYAGE": return "VES_VOYAGE -> ESCALA";
-                    case "VES_VOYAGE": return "VES_VOYAGE -> ESCALA";
-                    case "VESSEL": return "VESSEL -> NAVIO";
-                    case "ITEM_REEFER": return "ITEM_REEFER -> MERCADORIA";                    
-                    case "ITEM_SEAL": return "ITEM_SEAL -> AMR_LACRE_MERCADORIA";
-                    case "ITEMSEAL": return "ITEM_SEAL -> AMR_LACRE_MERCADORIA";
-                    case "ITEM_OOG": return "ITEM_OOG -> EXCESSO";
-                    case "ITEMOOG": return "ITEM_OOG -> EXCESSO";
-                    case "ITEM_LOCATION": return "ITEM_LOCATION -> AMR_LOCALIZACAO_MERCADORIA";
-                    case "ITEMLOCATION": return "ITEM_LOCATION -> AMR_LOCALIZACAO_MERCADORIA";
-                    case "BOOKINGS": return "BOOKINGS -> BOOKING + ITEM_BOOKING";
-                    case "PORTCODE": return "PORTCODE -> PORTO";
-                    case "DAMAGE_CODE": return "DAMAGE_CODE -> TIPO_AVARIA";
-                    case "CHE_MASTER": return "CHE_MASTER -> EQUIPAMENTOS";
-                    case "STOP_CODE": return "STOP_CODE -> BLOQUEIO";
-                    case "SEAL_TYPE": return "SEAL_TYPE -> TIPO_LACRE";
-                    case "VIEW_VES_SCHEDULE": return "VIEW_VES_SCHEDULE -> ESCALA";
-                    case "VES_SERVICE": return "VES_SERVICE -> SERVICOS_NAVIO";
-                    case "CUSTOMER": return "CUSTOMER -> LOCAL_PARCEIRO";
+                    case "ITEM": return "ITEM -> BHS.MERCADORIA";
+                    case "VESSEL_DETAILS": return "VESSEL_DETAILS -> BHS.ESCALA";
+                    case "VESSELDETAILS": return "VESSEL_DETAILS -> BHS.ESCALA";
+                    case "VESVOYAGE": return "VES_VOYAGE -> BHS.ESCALA";
+                    case "VES_VOYAGE": return "VES_VOYAGE -> BHS.ESCALA";
+                    case "VESSEL": return "VESSEL -> BHS.NAVIO";
+                    case "ITEM_REEFER": return "ITEM_REEFER -> BHS.MERCADORIA";                    
+                    case "ITEM_SEAL": return "ITEM_SEAL -> BHS.AMR_LACRE_MERCADORIA";
+                    case "ITEMSEAL": return "ITEM_SEAL -> BHS.AMR_LACRE_MERCADORIA";
+                    case "ITEM_OOG": return "ITEM_OOG -> BHS.EXCESSO";
+                    case "ITEMOOG": return "ITEM_OOG -> BHS.EXCESSO";
+                    case "ITEM_LOCATION": return "ITEM_LOCATION -> BHS.AMR_LOCALIZACAO_MERCADORIA";
+                    case "ITEMLOCATION": return "ITEM_LOCATION -> BHS.AMR_LOCALIZACAO_MERCADORIA";
+                    case "BOOKINGS": return "BOOKINGS -> BHS.BOOKING + BHS.ITEM_BOOKING";
+                    case "PORTCODE": return "PORTCODE -> BHS.PORTO";
+                    case "DAMAGE_CODE": return "DAMAGE_CODE -> BHS.TIPO_AVARIA";
+                    case "CHE_MASTER": return "CHE_MASTER -> BHS.EQUIPAMENTOS";
+                    case "STOP_CODE": return "STOP_CODE -> BHS.BLOQUEIO";
+                    case "SEAL_TYPE": return "SEAL_TYPE -> BHS.TIPO_LACRE";
+                    case "VIEW_VES_SCHEDULE": return "VIEW_VES_SCHEDULE -> BHS.ESCALA";
+                    case "VES_SERVICE": return "VES_SERVICE -> BHS.SERVICOS_NAVIO";
+                    case "CUSTOMER": return "CUSTOMER -> ACCESSCONTROL.LOCAL_PARCEIRO";
+                    case "ISO_CODE": return "ISO_CODE -> BHS.ISO_CODE";
+                    case "HAZ_MASTER": return "HAZ_MASTER -> BHS.IMO";
+                    case "OPERATOR": return "OPERATOR -> ACCESSCONTROL.USUARIO";
+                    case "DISCHARGE_LIST": return "DISCHARGE_LIST -> BHS.VW_MERCADORIA";
+                    case "VW_ESCALA": return "VW_ESCALA -> BHS.ESCALA";
                     default: return "";
                 }
                 
@@ -171,7 +176,12 @@ namespace ProcurarTextoNoArquivo
                     "SEAL_TYPE",
                     "VIEW_VES_SCHEDULE",
                     "VES_SERVICE",
-                    "CUSTOMER"
+                    "CUSTOMER",
+                    "ISO_CODE",
+                    "HAZ_MASTER",
+                    "OPERATOR",
+                    "DISCHARGE_LIST",
+                    "VW_ESCALA"
                 };
 
                 foreach (var tabelaTops in tabelasTops)
