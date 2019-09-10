@@ -146,6 +146,9 @@ namespace ProcurarTextoNoArquivo
                     case "OPERATOR": return "OPERATOR -> ACCESSCONTROL.USUARIO";
                     case "DISCHARGE_LIST": return "DISCHARGE_LIST -> BHS.VW_MERCADORIA";
                     case "VW_ESCALA": return "VW_ESCALA -> BHS.ESCALA";
+                    case "DISCH_DANGEROUS": return "DISCH_DANGEROUS -> BHS.AMR_IMO_MERCADORIA";
+                    case "DISCH_REEFER": return "DISCH_REEFER -> BHS.MERCADORIA";
+                    case "DISCH_OOG": return "DISCH_OOG -> BHS.EXCESSO";
                     default: return "";
                 }
                 
@@ -181,7 +184,10 @@ namespace ProcurarTextoNoArquivo
                     "HAZ_MASTER",
                     "OPERATOR",
                     "DISCHARGE_LIST",
-                    "VW_ESCALA"
+                    "VW_ESCALA",
+                    "DISCH_DANGEROUS",
+                    "DISCH_REEFER",
+                    "DISCH_OOG"
                 };
 
                 foreach (var tabelaTops in tabelasTops)
@@ -208,9 +214,10 @@ namespace ProcurarTextoNoArquivo
                 if (indice > -1)
                 {
                     string arquivo = dtgArquivos.Rows[indice].Cells["CaminhoArquivo"].Value.ToString();
+                    string linha = dtgArquivos.Rows[indice].Cells["NumeroLinha"].Value.ToString();
                     try
                     {
-                        System.Diagnostics.Process.Start("notepad++", arquivo);
+                        System.Diagnostics.Process.Start("notepad++", $"{arquivo} -n{linha}");
                     }
                     catch (Win32Exception)
                     {
