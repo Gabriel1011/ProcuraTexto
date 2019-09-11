@@ -149,6 +149,7 @@ namespace ProcurarTextoNoArquivo
                     case "DISCH_DANGEROUS": return "DISCH_DANGEROUS -> BHS.AMR_IMO_MERCADORIA";
                     case "DISCH_REEFER": return "DISCH_REEFER -> BHS.MERCADORIA";
                     case "DISCH_OOG": return "DISCH_OOG -> BHS.EXCESSO";
+                    case "BOOKING_DANGEROUS": return "BOOKING_DANGEROUS -> BHS.ITEM_BOOKING";
                     default: return "";
                 }
                 
@@ -187,7 +188,8 @@ namespace ProcurarTextoNoArquivo
                     "VW_ESCALA",
                     "DISCH_DANGEROUS",
                     "DISCH_REEFER",
-                    "DISCH_OOG"
+                    "DISCH_OOG",
+                    "BOOKING_DANGEROUS"
                 };
 
                 foreach (var tabelaTops in tabelasTops)
