@@ -112,7 +112,6 @@ namespace ProcurarTextoNoArquivo
                 throw;
             }
 
-
             string VerificarDePara(string linha)
             {
                 if(linha.Contains("DAMAGE_CODE"))
@@ -150,9 +149,9 @@ namespace ProcurarTextoNoArquivo
                     case "DISCH_REEFER": return "DISCH_REEFER -> BHS.MERCADORIA";
                     case "DISCH_OOG": return "DISCH_OOG -> BHS.EXCESSO";
                     case "BOOKING_DANGEROUS": return "BOOKING_DANGEROUS -> BHS.ITEM_BOOKING";
+                    case "ITEM_STOPS": return "ITEM_STOPS -> BHS.AMR_BLOQUEIO_MERCADORIA + BHS.BLOQUEIO";
                     default: return "";
                 }
-                
             }
 
             string VerificarContains(string linha)
@@ -189,7 +188,8 @@ namespace ProcurarTextoNoArquivo
                     "DISCH_DANGEROUS",
                     "DISCH_REEFER",
                     "DISCH_OOG",
-                    "BOOKING_DANGEROUS"
+                    "BOOKING_DANGEROUS",
+                    "ITEM_STOPS"
                 };
 
                 foreach (var tabelaTops in tabelasTops)
