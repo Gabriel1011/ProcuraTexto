@@ -48,6 +48,7 @@ namespace ProcurarTextoNoArquivo
             }
 
             //dtgArquivos.DataSource = linhasEncontradas;
+            txtQuantidade.Text = Convert.ToString(dtgArquivos.Rows.Count);
             dtgArquivos.Refresh();
         }
 
