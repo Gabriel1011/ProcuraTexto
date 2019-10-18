@@ -26,8 +26,8 @@ namespace ProcurarTextoNoArquivo
 
             var pastas = Directory.GetDirectories(txtCaminho.Text.Trim(), "*", SearchOption.AllDirectories);
 
-            pastas = pastas.Where(p => !p.EndsWith("bin") 
-            && !p.EndsWith("release") 
+            pastas = pastas.Where(p => !p.EndsWith("bin")
+            && !p.EndsWith("release")
             && !p.EndsWith("Properties")
             && !p.EndsWith("obj")
             && !p.EndsWith("Debug")
@@ -47,9 +47,27 @@ namespace ProcurarTextoNoArquivo
                 ProcurarArquivos(pasta, txtProcura.Text.Trim());
             }
 
-            //dtgArquivos.DataSource = linhasEncontradas;
-            txtQuantidade.Text = Convert.ToString(dtgArquivos.Rows.Count);
+            //dtgArquivos.DataSource = linhasEncontradas;            
             dtgArquivos.Refresh();
+            PreencherContadores();
+        }
+
+
+
+        public void PreencherContadores()
+        {
+            dtgContadores.Rows.Clear();
+            txtQuantidade.Text = Convert.ToString(dtgArquivos.Rows.Count);
+
+
+            var tabelas = dtgArquivos.Rows.OfType<DataGridViewRow>().Select(p => p.Cells["Tabelas"].Value.ToString())
+                .Distinct().ToList();
+
+            tabelas.ForEach((tabela) =>
+                {
+                    dtgContadores.Rows.Add(tabela, dtgArquivos.Rows.OfType<DataGridViewRow>().Count(p => p.Cells["Tabelas"].Value.ToString() == tabela));
+                });
+
         }
 
         private bool ValidarCampos()
@@ -102,8 +120,7 @@ namespace ProcurarTextoNoArquivo
                         if (linha.ToUpper().Contains(parametro.ToUpper()))
                         {
                             //linhasEncontradas.Add(new ArquivoEncontrado(linha.Trim(), file.Name, linhas.IndexOf(linha) + 1, Path.GetExtension($"{caminho}\\{file}")));
-                            dtgArquivos.Rows.Add(file.Name, linhas.IndexOf(linha) + 1, Path.GetExtension($"{caminho}\\{file}"), linha.Trim(), $"{caminho}\\{file}", VerificarDePara(linha.ToUpper()));
-                            var teste = VerificarDePara(linha.ToUpper());
+                            dtgArquivos.Rows.Add(file.Name, linhas.IndexOf(linha) + 1, Path.GetExtension($"{caminho}\\{file}"), linha.Trim(), $"{caminho}\\{file}", VerificarDePara(linha.ToUpper(), out string tabela), tabela);
                         }
                     }
                 }
@@ -113,11 +130,9 @@ namespace ProcurarTextoNoArquivo
                 throw;
             }
 
-            string VerificarDePara(string linha)
+            string VerificarDePara(string linha, out string tabela)
             {
-                if(linha.Contains("DAMAGE_CODE"))
-                { }
-                switch (VerificarContains(linha))
+                switch (VerificarContains(linha, out tabela))
                 {
                     case "ITEM": return "ITEM -> BHS.MERCADORIA";
                     case "VESSEL_DETAILS": return "VESSEL_DETAILS -> BHS.ESCALA";
@@ -125,7 +140,7 @@ namespace ProcurarTextoNoArquivo
                     case "VESVOYAGE": return "VES_VOYAGE -> BHS.ESCALA";
                     case "VES_VOYAGE": return "VES_VOYAGE -> BHS.ESCALA";
                     case "VESSEL": return "VESSEL -> BHS.NAVIO";
-                    case "ITEM_REEFER": return "ITEM_REEFER -> BHS.MERCADORIA";                    
+                    case "ITEM_REEFER": return "ITEM_REEFER -> BHS.MERCADORIA";
                     case "ITEM_SEAL": return "ITEM_SEAL -> BHS.AMR_LACRE_MERCADORIA";
                     case "ITEMSEAL": return "ITEM_SEAL -> BHS.AMR_LACRE_MERCADORIA";
                     case "ITEM_OOG": return "ITEM_OOG -> BHS.EXCESSO";
@@ -155,7 +170,7 @@ namespace ProcurarTextoNoArquivo
                 }
             }
 
-            string VerificarContains(string linha)
+            string VerificarContains(string linha, out string tabela)
             {
                 var tabelasTops = new List<string>
                 {
@@ -194,25 +209,25 @@ namespace ProcurarTextoNoArquivo
                 };
 
                 foreach (var tabelaTops in tabelasTops)
-                {                                                                                                                                              
+                {
                     if (linha.Contains(tabelaTops))
+                    {
+                        tabela = tabelaTops;
                         return tabelaTops;
+                    }
                 }
 
+                tabela = string.Empty;
                 return "";
             }
         }
 
-        private List<string> TransformarEmLista(string texto)
-        {
-
-            return texto.Replace("\n", "").Split('\r').ToList();
-        }
+        private List<string> TransformarEmLista(string texto) => texto.Replace("\n", "").Split('\r').ToList();
 
         private void DtgArquivos_DoubleClick(object sender, EventArgs e)
         {
             try
-            {                
+            {
                 int indice = dtgArquivos.SelectedRows[0].Index;
                 if (indice > -1)
                 {
