@@ -166,6 +166,7 @@ namespace ProcurarTextoNoArquivo
                     case "DISCH_OOG": return "DISCH_OOG -> BHS.EXCESSO";
                     case "BOOKING_DANGEROUS": return "BOOKING_DANGEROUS -> BHS.ITEM_BOOKING";
                     case "ITEM_STOPS": return "ITEM_STOPS -> BHS.AMR_BLOQUEIO_MERCADORIA + BHS.BLOQUEIO";
+                    case "REEFER_MONITOR": return "REEFER_MONITOR -> BHS.MONITORAMENTO_REFER";
                     default: return "";
                 }
             }
